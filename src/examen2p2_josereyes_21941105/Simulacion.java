@@ -6,7 +6,9 @@
 package examen2p2_josereyes_21941105;
 
 import static java.awt.MouseInfo.getPointerInfo;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -32,6 +34,8 @@ public class Simulacion extends javax.swing.JFrame {
         modelo = (DefaultTreeModel)jt_planetas.getModel();
         root = new DefaultMutableTreeNode("Planetas"); 
         llenarTree();
+        llenarComboBox();
+        intento();
     }
 
     /**
@@ -179,7 +183,7 @@ public class Simulacion extends javax.swing.JFrame {
     private void jb_addCientificoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addCientificoMouseClicked
         cientificos.add(new Cientificos(jt_nombre.getText()));
         llenarComboBox();
-        jt_nombre.setText(" ");
+        jt_nombre.setText("");
         guardar();
     }//GEN-LAST:event_jb_addCientificoMouseClicked
 
@@ -211,7 +215,7 @@ public class Simulacion extends javax.swing.JFrame {
         jPopupMenu1.setVisible(true);
         jPopupMenu1.setLocation(getPointerInfo().getLocation());
         String planeta =jt_planetas.getSelectionPath().toString();
-        Planeta=planeta.replace("[Planeta, ", "").replace("]","");
+        Planeta=planeta.replace("[Planetas, ", "").replace("]","");
     }//GEN-LAST:event_jt_planetasValueChanged
 
     /**
@@ -303,5 +307,17 @@ public class Simulacion extends javax.swing.JFrame {
             root.add(hijo);
         }
         modelo.setRoot(root);
+    }
+    public void intento(){
+        try{
+            ObjectInputStream os =new ObjectInputStream(new FileInputStream("./cientificos.jc"));
+            Cientificos cientifico;
+            while((cientifico=(Cientificos)os.readObject())!=null){
+                System.out.println(cientifico.nombre);
+                cientificos.add(cientifico);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
 }
