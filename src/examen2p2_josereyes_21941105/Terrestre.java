@@ -5,18 +5,17 @@
  */
 package examen2p2_josereyes_21941105;
 
+import java.io.Serializable;
+
 /**
  *
  * @author josec
  */
-public class Examen2P2_JoseReyes_21941105 {
+public class Terrestre extends Planeta implements Serializable{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        (new Simulacion()).setVisible(true);
+    public Terrestre(String nombre, int tamano, int peso, int X, int Y) {
+        super(nombre, tamano, peso, X, Y);
     }
+    
     
 }
