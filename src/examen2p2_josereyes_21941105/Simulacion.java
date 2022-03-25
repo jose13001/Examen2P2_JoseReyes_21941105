@@ -5,6 +5,7 @@
  */
 package examen2p2_josereyes_21941105;
 
+import static java.awt.MouseInfo.getPointerInfo;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -82,6 +83,11 @@ public class Simulacion extends javax.swing.JFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("planetas");
         jt_planetas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jt_planetas.setComponentPopupMenu(jPopupMenu1);
+        jt_planetas.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jt_planetasValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_planetas);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -186,15 +192,27 @@ public class Simulacion extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jc_publicosItemStateChanged
-
+    
     private void planeta_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planeta_1ActionPerformed
         // TODO add your handling code here:
+        jt_planeta1.setText(Planeta);
+        jPopupMenu1.setVisible(false);
         
     }//GEN-LAST:event_planeta_1ActionPerformed
 
     private void planeta_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planeta_2ActionPerformed
         // TODO add your handling code here:
+        jt_planeta2.setText(Planeta);
+        jPopupMenu1.setVisible(false);
     }//GEN-LAST:event_planeta_2ActionPerformed
+
+    private void jt_planetasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jt_planetasValueChanged
+        // TODO add your handling code here:
+        jPopupMenu1.setVisible(true);
+        jPopupMenu1.setLocation(getPointerInfo().getLocation());
+        String planeta =jt_planetas.getSelectionPath().toString();
+        Planeta=planeta.replace("[Planeta, ", "").replace("]","");
+    }//GEN-LAST:event_jt_planetasValueChanged
 
     /**
      * @param args the command line arguments
@@ -249,7 +267,7 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem planeta_1;
     private javax.swing.JMenuItem planeta_2;
     // End of variables declaration//GEN-END:variables
-
+    String Planeta="";
     public void planetasPublic(){
         planetasPublic.add(new Terrestre(5000,13000,"Mercurio",400,300));
         planetasPublic.add(new Terrestre(100000,15000,"Venus",640,260));

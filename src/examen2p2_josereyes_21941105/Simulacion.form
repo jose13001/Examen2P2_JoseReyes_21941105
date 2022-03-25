@@ -142,6 +142,9 @@
               <ComponentRef name="jPopupMenu1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jt_planetasValueChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
