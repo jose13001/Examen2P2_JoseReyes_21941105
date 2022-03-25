@@ -30,6 +30,7 @@ public class Simulacion extends javax.swing.JFrame {
         planetasPublic();
         modelo = (DefaultTreeModel)jt_planetas.getModel();
         root = new DefaultMutableTreeNode("Planetas"); 
+        llenarTree();
     }
 
     /**
@@ -41,6 +42,9 @@ public class Simulacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        planeta_1 = new javax.swing.JMenuItem();
+        planeta_2 = new javax.swing.JMenuItem();
         pb_colision = new javax.swing.JProgressBar();
         pb_puntosextras = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -55,10 +59,29 @@ public class Simulacion extends javax.swing.JFrame {
         jb_addCientifico = new javax.swing.JButton();
         jb_colisionar = new javax.swing.JButton();
 
+        planeta_1.setText("Planeta 1");
+        planeta_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                planeta_1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(planeta_1);
+
+        planeta_2.setText("Planeta 2");
+        planeta_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                planeta_2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(planeta_2);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        pb_colision.setForeground(new java.awt.Color(102, 255, 51));
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("planetas");
         jt_planetas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_planetas.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jt_planetas);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -67,6 +90,7 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
 
+        jc_publicos.setSelected(true);
         jc_publicos.setText("Publicos");
         jc_publicos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -163,6 +187,15 @@ public class Simulacion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jc_publicosItemStateChanged
 
+    private void planeta_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planeta_1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_planeta_1ActionPerformed
+
+    private void planeta_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planeta_2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_planeta_2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +235,7 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_cientificos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_addCientifico;
     private javax.swing.JButton jb_colisionar;
@@ -212,6 +246,8 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JTree jt_planetas;
     private javax.swing.JProgressBar pb_colision;
     private javax.swing.JProgressBar pb_puntosextras;
+    private javax.swing.JMenuItem planeta_1;
+    private javax.swing.JMenuItem planeta_2;
     // End of variables declaration//GEN-END:variables
 
     public void planetasPublic(){
@@ -225,7 +261,8 @@ public class Simulacion extends javax.swing.JFrame {
         planetasPublic.add(new Gaseoso(200000,20000,"Neptuno",840,900));
     }
     public void vaciarTree(){
-        
+        root.removeAllChildren();
+        modelo.reload();
     }
     public void guardar(){
         try{
@@ -247,5 +284,6 @@ public class Simulacion extends javax.swing.JFrame {
             DefaultMutableTreeNode hijo =new DefaultMutableTreeNode(planeta.nombre);
             root.add(hijo);
         }
+        modelo.setRoot(root);
     }
 }
