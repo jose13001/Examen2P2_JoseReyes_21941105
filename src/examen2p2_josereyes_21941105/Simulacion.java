@@ -84,6 +84,8 @@ public class Simulacion extends javax.swing.JFrame {
 
         pb_colision.setForeground(new java.awt.Color(102, 255, 51));
 
+        pb_puntosextras.setForeground(new java.awt.Color(51, 255, 51));
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("planetas");
         jt_planetas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jt_planetas.setComponentPopupMenu(jPopupMenu1);
@@ -96,6 +98,12 @@ public class Simulacion extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setText("Cientificos");
+
+        cb_cientificos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb_cientificosMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
@@ -172,9 +180,9 @@ public class Simulacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jb_addCientifico))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jc_publicos)
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         pack();
@@ -217,6 +225,14 @@ public class Simulacion extends javax.swing.JFrame {
         String planeta =jt_planetas.getSelectionPath().toString();
         Planeta=planeta.replace("[Planetas, ", "").replace("]","");
     }//GEN-LAST:event_jt_planetasValueChanged
+
+    private void cb_cientificosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_cientificosMouseClicked
+        // TODO add your handling code here:
+        if(cb_cientificos.getSelectedItem()!=null){
+            Cientificos cientifico = search(String.valueOf(cb_cientificos.getSelectedItem()));
+            llenarTree2(cientifico);
+        }
+    }//GEN-LAST:event_cb_cientificosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -319,5 +335,21 @@ public class Simulacion extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e);
         }
+    }
+    public Cientificos search(String nombre){
+         for(Cientificos c: cientificos){
+            if(c.nombre.equals(nombre)){
+                return c;
+            }
+        }
+        return null;
+        
+    }
+    public void llenarTree2(Cientificos c){
+        for(Planeta p:c.planetas){
+            DefaultMutableTreeNode hijo=new DefaultMutableTreeNode(p.nombre);
+            root.add(hijo);
+        }
+        modelo.setRoot(root);
     }
 }
