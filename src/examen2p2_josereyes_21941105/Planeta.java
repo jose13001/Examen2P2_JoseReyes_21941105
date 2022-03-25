@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Planeta implements Serializable{
     private int tamano;
     private int peso;
-    private String nombre;
+    String nombre;
     private int X;
     private int Y;
 

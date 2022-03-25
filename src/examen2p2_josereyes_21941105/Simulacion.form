@@ -147,6 +147,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Publicos"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jc_publicosItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jb_addCientifico">
       <Properties>

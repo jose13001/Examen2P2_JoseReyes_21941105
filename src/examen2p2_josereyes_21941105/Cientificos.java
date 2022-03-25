@@ -5,14 +5,15 @@
  */
 package examen2p2_josereyes_21941105;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author josec
  */
-public class Cientificos {
-    private String nombre;
+public class Cientificos implements Serializable{
+    String nombre;
     ArrayList<Planeta>planetas=new ArrayList();
 
     public Cientificos(String nombre) {

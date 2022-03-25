@@ -5,7 +5,11 @@
  */
 package examen2p2_josereyes_21941105;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -17,10 +21,15 @@ public class Simulacion extends javax.swing.JFrame {
      * Creates new form Simulacion
      */
     ArrayList<Planeta>planetasPublic=new ArrayList();
+    ArrayList<Cientificos>cientificos=new ArrayList();
+    private final DefaultMutableTreeNode root;
+    private final DefaultTreeModel modelo;
     public Simulacion() {
         initComponents();
         this.setLocationRelativeTo(null);
         planetasPublic();
+        modelo = (DefaultTreeModel)jt_planetas.getModel();
+        root = new DefaultMutableTreeNode("Planetas"); 
     }
 
     /**
@@ -59,6 +68,11 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel2.setText("Nombre");
 
         jc_publicos.setText("Publicos");
+        jc_publicos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jc_publicosItemStateChanged(evt);
+            }
+        });
 
         jb_addCientifico.setText("agregar cientifico");
         jb_addCientifico.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,9 +147,21 @@ public class Simulacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_addCientificoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addCientificoMouseClicked
-        String nombre =jt_nombre.getSelectedText();
-        
+        cientificos.add(new Cientificos(jt_nombre.getText()));
+        llenarComboBox();
+        jt_nombre.setText(" ");
+        guardar();
     }//GEN-LAST:event_jb_addCientificoMouseClicked
+
+    private void jc_publicosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jc_publicosItemStateChanged
+        if(jc_publicos.isSelected()){
+            vaciarTree();
+            llenarTree();
+        }else{
+            vaciarTree();
+        }
+        
+    }//GEN-LAST:event_jc_publicosItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -197,5 +223,29 @@ public class Simulacion extends javax.swing.JFrame {
         planetasPublic.add(new Gaseoso(300000,30000,"Saturno",560,450));
         planetasPublic.add(new Gaseoso(200000,20000,"Urano",670,690));
         planetasPublic.add(new Gaseoso(200000,20000,"Neptuno",840,900));
+    }
+    public void vaciarTree(){
+        
+    }
+    public void guardar(){
+        try{
+            ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("./cientificos.jc"));
+            for(Cientificos c : cientificos)
+                os.writeObject(c);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void llenarComboBox(){
+        cb_cientificos.removeAllItems();
+        for(Cientificos c:cientificos){
+            cb_cientificos.addItem(c.nombre);
+        }
+    }
+    public void llenarTree(){
+        for(Planeta planeta:planetasPublic){
+            DefaultMutableTreeNode hijo =new DefaultMutableTreeNode(planeta.nombre);
+            root.add(hijo);
+        }
     }
 }
