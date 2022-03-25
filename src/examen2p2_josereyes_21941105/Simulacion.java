@@ -24,6 +24,7 @@ public class Simulacion extends javax.swing.JFrame {
      * Creates new form Simulacion
      */
     ArrayList<Planeta>planetasPublic=new ArrayList();
+    ArrayList<Planeta>list=new ArrayList();
     ArrayList<Cientificos>cientificos=new ArrayList();
     private final DefaultMutableTreeNode root;
     private final DefaultTreeModel modelo;
@@ -125,6 +126,11 @@ public class Simulacion extends javax.swing.JFrame {
 
         jb_colisionar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jb_colisionar.setText("Colisionar");
+        jb_colisionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_colisionarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,6 +240,14 @@ public class Simulacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cb_cientificosMouseClicked
 
+    private void jb_colisionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_colisionarMouseClicked
+        // TODO add your handling code here:
+        planeta1=searchPlaneta(jt_planeta1.getText());
+        planeta2=searchPlaneta(jt_planeta2.getText());
+        double distanciaP=Math.sqrt(Math.pow((planeta1.X-planeta2.X),2)+Math.pow((planeta1.Y-planeta2.Y),2));
+        
+    }//GEN-LAST:event_jb_colisionarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -288,6 +302,9 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem planeta_2;
     // End of variables declaration//GEN-END:variables
     String Planeta="";
+    double distancia;
+    Planeta planeta1;
+    Planeta planeta2;
     public void planetasPublic(){
         planetasPublic.add(new Terrestre(5000,13000,"Mercurio",400,300));
         planetasPublic.add(new Terrestre(100000,15000,"Venus",640,260));
@@ -351,5 +368,13 @@ public class Simulacion extends javax.swing.JFrame {
             root.add(hijo);
         }
         modelo.setRoot(root);
+    }
+    public Planeta searchPlaneta(String nombre){
+        for(Planeta p:list){
+            if(p.nombre.equals(nombre)){
+                return p;
+            }
+        }
+        return null;
     }
 }

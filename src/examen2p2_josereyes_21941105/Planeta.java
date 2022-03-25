@@ -15,8 +15,8 @@ public class Planeta implements Serializable{
     private int tamano;
     private int peso;
     String nombre;
-    private int X;
-    private int Y;
+     int X;
+     int Y;
 
     public Planeta() {
     }
