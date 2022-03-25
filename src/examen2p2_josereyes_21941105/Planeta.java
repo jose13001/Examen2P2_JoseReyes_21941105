@@ -12,19 +12,19 @@ import java.io.Serializable;
  * @author josec
  */
 public class Planeta implements Serializable{
-    private String nombre;
     private int tamano;
     private int peso;
+    private String nombre;
     private int X;
     private int Y;
 
     public Planeta() {
     }
 
-    public Planeta(String nombre, int tamano, int peso, int X, int Y) {
-        this.nombre = nombre;
+    public Planeta(int tamano, int peso,String nombre, int X, int Y) {   
         this.tamano = tamano;
         this.peso = peso;
+        this.nombre = nombre;
         this.X = X;
         this.Y = Y;
     }

@@ -13,9 +13,16 @@ import java.io.Serializable;
  */
 public class Terrestre extends Planeta implements Serializable{
 
-    public Terrestre(String nombre, int tamano, int peso, int X, int Y) {
-        super(nombre, tamano, peso, X, Y);
+    public Terrestre() {
     }
+
+    public Terrestre(int tamano, int peso, String nombre, int X, int Y) {
+        super(tamano, peso, nombre, X, Y);
+    }
+
+
+
+    
     
     
 }
