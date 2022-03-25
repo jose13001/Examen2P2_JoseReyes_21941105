@@ -245,6 +245,7 @@ public class Simulacion extends javax.swing.JFrame {
         planeta1=searchPlaneta(jt_planeta1.getText());
         planeta2=searchPlaneta(jt_planeta2.getText());
         double distanciaP=Math.sqrt(Math.pow((planeta1.X-planeta2.X),2)+Math.pow((planeta1.Y-planeta2.Y),2));
+        distancia=(int)distanciaP;
         
     }//GEN-LAST:event_jb_colisionarMouseClicked
 
@@ -302,7 +303,7 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem planeta_2;
     // End of variables declaration//GEN-END:variables
     String Planeta="";
-    double distancia;
+    int distancia;
     Planeta planeta1;
     Planeta planeta2;
     public void planetasPublic(){
@@ -376,5 +377,20 @@ public class Simulacion extends javax.swing.JFrame {
             }
         }
         return null;
+    }
+    
+    class hilo extends Thread{
+        
+        public void run(){
+            pb_colision.setMaximum(distancia);
+            try{
+                for(int i=0;i<distancia;i++){
+                    
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+        
     }
 }
