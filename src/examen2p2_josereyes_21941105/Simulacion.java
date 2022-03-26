@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -23,13 +25,16 @@ public class Simulacion extends javax.swing.JFrame{
     /**
      * Creates new form Simulacion
      */
-    ArrayList<Planeta>planetasPublic=new ArrayList();
-    ArrayList<Planeta>list=new ArrayList();
-    ArrayList<Cientificos>cientificos=new ArrayList();
+    ArrayList<Planeta>planetasPublic;
+    ArrayList<Planeta>list;
+    ArrayList<Cientificos>cientificos;
     private final DefaultMutableTreeNode root;
     private final DefaultTreeModel modelo;
     
     public Simulacion() {
+        planetasPublic=new ArrayList();
+        list=new ArrayList();
+        cientificos=new ArrayList();
         initComponents();
         this.setLocationRelativeTo(null);
         planetasPublic();
@@ -38,6 +43,7 @@ public class Simulacion extends javax.swing.JFrame{
         llenarTree();
         llenarComboBox();
         intento();
+        
         
     }
 
@@ -399,11 +405,31 @@ public class Simulacion extends javax.swing.JFrame{
                     search(String.valueOf(cb_cientificos.getSelectedItem())).planetas.add(planetanuevo);
                     guardar();
                 }
-            }catch(Exception e){
-                System.out.println(e);
+                puntosextras();
+            }catch(InterruptedException e){
+                e.printStackTrace();
             }
             
         }
         
     }
+    
+    double tiempo;
+         double energy;
+         double energyMax=0;
+         
+         public void puntosextras(){
+             double tiempoSec =tiempo/1000; 
+             double velocidad = distancia/tiempoSec;
+             energy=(0.5*((planeta1.peso+planeta2.peso)/2)*Math.pow(velocidad,2));
+             Random r = new Random();
+             double energiaMax = ThreadLocalRandom.current().nextDouble(energy, 2*energy);
+             System.out.println("Tiempo = "+tiempoSec+"s");
+             System.out.println("Distancia = "+distancia);
+             System.out.println("Velocidad = "+velocidad);
+             System.out.println("Energía = "+energy);
+             System.out.println("Energía Máxima= "+energiaMax);
+             
+             
+         }
 }
