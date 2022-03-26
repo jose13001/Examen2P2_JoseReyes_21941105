@@ -13,8 +13,8 @@ import java.util.Random;
  * @author josec
  */
 public abstract class Planeta implements Serializable{
-    private int tamano;
-    private int peso;
+     int tamano;
+     int peso;
     String nombre;
      int X;
      int Y;

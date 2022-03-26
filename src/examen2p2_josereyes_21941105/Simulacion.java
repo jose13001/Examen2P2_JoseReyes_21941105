@@ -28,6 +28,7 @@ public class Simulacion extends javax.swing.JFrame{
     ArrayList<Cientificos>cientificos=new ArrayList();
     private final DefaultMutableTreeNode root;
     private final DefaultTreeModel modelo;
+    
     public Simulacion() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -37,6 +38,7 @@ public class Simulacion extends javax.swing.JFrame{
         llenarTree();
         llenarComboBox();
         intento();
+        
     }
 
     /**
