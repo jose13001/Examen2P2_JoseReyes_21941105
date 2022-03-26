@@ -6,6 +6,7 @@
 package examen2p2_josereyes_21941105;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  *
@@ -17,6 +18,7 @@ public abstract class Planeta implements Serializable{
     String nombre;
      int X;
      int Y;
+     Random r=new Random();
 
     public Planeta() {
     }
@@ -29,8 +31,12 @@ public abstract class Planeta implements Serializable{
         this.Y = Y;
     }
     
-    public abstract int probabilidad();
+    public boolean probabilidad(int porcentaje){
+        int num=r.nextInt(100);
+        return num<=porcentaje;
+    }
     
+    public abstract Planeta colision (Planeta planeta2);
 
     public String getNombre() {
         return nombre;

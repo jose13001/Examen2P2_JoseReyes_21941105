@@ -22,10 +22,11 @@ public class Gaseoso extends Planeta implements Serializable{
         super(tamano, peso, nombre, X, Y);
     }
 
+    
+
     @Override
-    public int probabilidad() {
-        int num=r.nextInt(100);
-        return num;
+    public Planeta colision(Planeta planeta2) {
+        
     }
 
 

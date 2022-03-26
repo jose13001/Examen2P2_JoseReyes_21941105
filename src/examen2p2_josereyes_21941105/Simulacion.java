@@ -246,7 +246,8 @@ public class Simulacion extends javax.swing.JFrame{
         planeta2=searchPlaneta(jt_planeta2.getText());
         double distanciaP=Math.sqrt(Math.pow((planeta1.X-planeta2.X),2)+Math.pow((planeta1.Y-planeta2.Y),2));
         distancia=(int)distanciaP;
-        
+        hilo colision=new hilo();
+        colision.start();
     }//GEN-LAST:event_jb_colisionarMouseClicked
 
     /**
@@ -387,7 +388,14 @@ public class Simulacion extends javax.swing.JFrame{
             pb_colision.setMaximum(distancia);
             try{
                 for(int i=0;i<distancia;i++){
-                    
+                    pb_colision.setValue(i);
+                    Thread.sleep(5);
+                }              
+                Planeta planetanuevo=planeta1.colision(planeta2);
+                if(planetanuevo!=null){
+                    list.add(planetanuevo);
+                    search(String.valueOf(cb_cientificos.getSelectedItem())).planetas.add(planetanuevo);
+                    guardar();
                 }
             }catch(Exception e){
                 System.out.println(e);
