@@ -32,9 +32,9 @@ public class Simulacion extends javax.swing.JFrame{
     private final DefaultTreeModel modelo;
     
     public Simulacion() {
-        planetasPublic=new ArrayList();
-        list=new ArrayList();
-        cientificos=new ArrayList();
+        planetasPublic=new ArrayList<>();
+        list=new ArrayList<>();
+        cientificos=new ArrayList<>();
         initComponents();
         this.setLocationRelativeTo(null);
         planetasPublic();
@@ -134,9 +134,9 @@ public class Simulacion extends javax.swing.JFrame{
 
         jb_colisionar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jb_colisionar.setText("Colisionar");
-        jb_colisionar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_colisionarMouseClicked(evt);
+        jb_colisionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_colisionarActionPerformed(evt);
             }
         });
 
@@ -215,6 +215,7 @@ public class Simulacion extends javax.swing.JFrame{
             llenarTree();
         }else{
             vaciarTree();
+            llenarTree2(cientifico);
         }
         
     }//GEN-LAST:event_jc_publicosItemStateChanged
@@ -243,20 +244,27 @@ public class Simulacion extends javax.swing.JFrame{
     private void cb_cientificosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_cientificosMouseClicked
         // TODO add your handling code here:
         if(cb_cientificos.getSelectedItem()!=null){
-            Cientificos cientifico = search(String.valueOf(cb_cientificos.getSelectedItem()));
+            cientifico = search(String.valueOf(cb_cientificos.getSelectedItem()));
+            vaciarTree();
+        }
+        if(jc_publicos.isSelected()){
+            vaciarTree();
+            llenarTree();
+        }else{
+            vaciarTree();
             llenarTree2(cientifico);
         }
     }//GEN-LAST:event_cb_cientificosMouseClicked
 
-    private void jb_colisionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_colisionarMouseClicked
+    private void jb_colisionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_colisionarActionPerformed
         // TODO add your handling code here:
         planeta1=searchPlaneta(jt_planeta1.getText());
         planeta2=searchPlaneta(jt_planeta2.getText());
-        double distanciaP=Math.sqrt(Math.pow((planeta1.X-planeta2.X),2)+Math.pow((planeta1.Y-planeta2.Y),2));
+        double distanciaP =Math.sqrt(Math.pow((planeta1.X-planeta2.X),2)+Math.pow((planeta1.Y-planeta2.Y),2));
         distancia=(int)distanciaP;
         hilo colision=new hilo();
         colision.start();
-    }//GEN-LAST:event_jb_colisionarMouseClicked
+    }//GEN-LAST:event_jb_colisionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,6 +323,7 @@ public class Simulacion extends javax.swing.JFrame{
     int distancia;
     Planeta planeta1;
     Planeta planeta2;
+    Cientificos cientifico;
     public void planetasPublic(){
         planetasPublic.add(new Terrestre(5000,13000,"Mercurio",400,300));
         planetasPublic.add(new Terrestre(100000,15000,"Venus",640,260));
@@ -354,10 +363,10 @@ public class Simulacion extends javax.swing.JFrame{
     public void intento(){
         try{
             ObjectInputStream os =new ObjectInputStream(new FileInputStream("./cientificos.jc"));
-            Cientificos cientifico;
-            while((cientifico=(Cientificos)os.readObject())!=null){
-                System.out.println(cientifico.nombre);
-                cientificos.add(cientifico);
+            Cientificos cientifico2;
+            while((cientifico2=(Cientificos)os.readObject())!=null){
+                System.out.println(cientifico2.nombre);
+                cientificos.add(cientifico2);
             }
         }catch(Exception e){
             System.out.println(e);
@@ -393,6 +402,7 @@ public class Simulacion extends javax.swing.JFrame{
     class hilo extends Thread{
         
         public void run(){
+            pb_colision.setVisible(true);
             pb_colision.setMaximum(distancia);
             try{
                 for(int i=0;i<distancia;i++){
@@ -407,7 +417,7 @@ public class Simulacion extends javax.swing.JFrame{
                 }
                 puntosextras();
             }catch(InterruptedException e){
-                e.printStackTrace();
+                
             }
             
         }
