@@ -18,7 +18,7 @@ import javax.swing.tree.DefaultTreeModel;
  *
  * @author josec
  */
-public class Simulacion extends javax.swing.JFrame {
+public class Simulacion extends javax.swing.JFrame{
 
     /**
      * Creates new form Simulacion
@@ -378,6 +378,8 @@ public class Simulacion extends javax.swing.JFrame {
         }
         return null;
     }
+
+    
     
     class hilo extends Thread{
         
@@ -390,6 +392,7 @@ public class Simulacion extends javax.swing.JFrame {
             }catch(Exception e){
                 System.out.println(e);
             }
+            
         }
         
     }

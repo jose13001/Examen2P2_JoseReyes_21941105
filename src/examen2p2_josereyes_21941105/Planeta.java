@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author josec
  */
-public class Planeta implements Serializable{
+public abstract class Planeta implements Serializable{
     private int tamano;
     private int peso;
     String nombre;
@@ -28,6 +28,9 @@ public class Planeta implements Serializable{
         this.X = X;
         this.Y = Y;
     }
+    
+    public abstract int probabilidad();
+    
 
     public String getNombre() {
         return nombre;

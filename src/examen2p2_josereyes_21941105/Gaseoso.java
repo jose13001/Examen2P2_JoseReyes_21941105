@@ -5,6 +5,7 @@
  */
 package examen2p2_josereyes_21941105;
 
+import java.util.Random;
 import java.io.Serializable;
 
 /**
@@ -12,12 +13,19 @@ import java.io.Serializable;
  * @author josec
  */
 public class Gaseoso extends Planeta implements Serializable{
+    Random r=new Random();
 
     public Gaseoso() {
     }
 
     public Gaseoso(int tamano, int peso, String nombre, int X, int Y) {
         super(tamano, peso, nombre, X, Y);
+    }
+
+    @Override
+    public int probabilidad() {
+        int num=r.nextInt(100);
+        return num;
     }
 
 
